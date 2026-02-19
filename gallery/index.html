@@ -143,6 +143,32 @@ body {
     center top/cover;
 }
   
+.buttons button#prev {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+}
+
+.buttons button#next {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+}
+
+.buttons button {
+  border: 2px solid #e5ebf3;
+  background-color: transparent;
+  color: #e5ebf3;
+  cursor: pointer;
+  padding: 13px 15px;
+  border-radius: 50%;
+  outline: none;
+}
+
+.buttons button:hover {
+  background-color: #e5ebf3;
+  color: #362a2b;
+}
 
 @media (min-width: 640px) and (min-height: 640px) {
   .slide .content {
@@ -192,6 +218,7 @@ body {
 
 
   </div>
+ 
   <!-- partial -->
   <script>
     const slides = document.querySelectorAll(".slide");
@@ -220,6 +247,21 @@ body {
         slides[slides.length - 1].classList.add("current");
       }
     };
+
+    nextButton.addEventListener("click", () => {
+      nextSlide();
+      if (auto) {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, intervalTime);
+      }
+    });
+    prevButton.addEventListener("click", () => {
+      prevSlide();
+      if (auto) {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, intervalTime);
+      }
+    });
 
     if (auto) {
       slideInterval = setInterval(nextSlide, intervalTime);
